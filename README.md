@@ -1,7 +1,7 @@
 # AngieSF
 Proyecto presentado como trabajo de fin de grado de ingeniería informática en la universidad de Granada.
 
-![Docker-1](https://github.com/jdafer98/Controv3rsial/blob/master/images/AngieSF_logo.png)
+![Docker-1](https://github.com/jdafer98/AngieSF/blob/master/images/AngieSF_logo.png)
 
 
 Software libre recogido bajo licencia:  [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
