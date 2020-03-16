@@ -4,6 +4,8 @@ python:
   - 3.7
 
 install:
-  - echo "OK"
+ - pip install --upgrade pip
+ - pip install -r requirements.txt
+ - pip install --upgrade pytest
 
-script: echo "OK"
+script: pytest
