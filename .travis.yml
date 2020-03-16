@@ -6,3 +6,4 @@ python:
 install:
   - echo "OK"
 
+script: 
