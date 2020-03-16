@@ -6,4 +6,3 @@ python:
 install:
   - echo "OK"
 
-# script: pytest
