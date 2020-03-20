@@ -14,6 +14,29 @@ RF4: El software debe ser capaz de reconocer a un host por nombre de dominio.
 
 RF5: El software debe ser capaz de realizar el trabajo de forma concurrente.
 
+RF6: El software debe ser capaz de aceptar un rango de puertos.
+
+RF7: El software debe ser capaz de aceptar argumentos por linea de órdenes.
+
+RF8: El software debe ser capaz de recivir como parámetro una red como ip/máscara a escanear.
+
+RF8: El software debe ser capaz de recivir como parámetro una red como ip/máscara a escanear.
+
+RF8: El software debe ser capaz de recivir como parámetro una red como ip/máscara a escanear.
+
+RF8: El software debe ser capaz de recivir como parámetro una red como ip/máscara a escanear.
+
+RF8: El software debe ser capaz de recivir como parámetro una red como ip/máscara a escanear.
+
+RF8: El software debe ser capaz de recivir como parámetro una red como ip/máscara a escanear.
+
+RF8: El software debe ser capaz de recivir como parámetro una red como ip/máscara a escanear.
+
+RF8: El software debe ser capaz de recivir como parámetro una red como ip/máscara a escanear.
+
+RF8: El software debe ser capaz de recivir como parámetro una red como ip/máscara a escanear.
+
+RF9: El software debe contar con un modo "verbose".
 # Requisitos no funcionales
 
 RNF1: El software debe realizar un escanéo empleando no mayor a 0.001 segundos por puerto escaneado.
