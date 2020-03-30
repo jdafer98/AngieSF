@@ -16,12 +16,18 @@ RF5: El software debe ser capaz de aceptar un rango de puertos.
 
 RF6: El software debe ser capaz de aceptar argumentos por linea de órdenes.
 
-RF7: El software debe ser capaz de recivir como parámetro una red como ip/máscara a escanear.
+RF7: El software debe ser capaz de recibir como parámetro una red como ip/máscara a escanear.
 
 RF8: El software debe contar con un modo "verbose".
 
+RF9: El software debe realizar un reporte final del trabajo realizado
+
 # Requisitos no funcionales
 
-RNF1: El software debe realizar un escanéo empleando no mayor a 0.001 segundos por puerto escaneado.
+RNF1: El software debe realizar un escanéo empleando no mayor a 2 segundos por puerto escaneado.
 
 RNF2: Las salidas del software deben mostrarse con colores.
+
+RNF3: Cada tarea debe ser realizada tan solo por una hebra.
+
+RFN4: No debe haber puertos o escaneos a host duplicados
