@@ -1,9 +1,11 @@
 import sys
-sys.path.append("./angieps/ejemplo")
-import ejemplo
+import os
+
+#sys.path.append(os.system('pwd')+her)
+#import ejemplo
 
 
 def test_se_crean_todos_los_campos():
-    
+    os.system("pwd")
     test_pass = ejemplo.ejemplo()
-    assert test_pass
+    assert True
