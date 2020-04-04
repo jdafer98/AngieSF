@@ -1,4 +1,5 @@
-import ..angieps.ejemplo
+sys.path.append("../angieps/ejemplo")
+import ejemplo
 
 
 def test_se_crean_todos_los_campos():
