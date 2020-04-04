@@ -1,5 +1,5 @@
 import sys
-sys.path.append("../angieps/ejemplo")
+sys.path.append("./angieps/ejemplo")
 import ejemplo
 
 
