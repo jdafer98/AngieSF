@@ -1,7 +1,7 @@
 import sys
 
-#sys.path.append()
-#import ejemplo
+sys.path.append('/home/travis/build/jdafer98/AngieSF/angieps')
+import ejemplo
 
 
 def test_se_crean_todos_los_campos():
