@@ -13,7 +13,7 @@ def test_task_se_genera_con_datos_correctos():
     test_pass = False
     example_ip = "192.168.1.1"
     example_port = 80
-    t = AngieTask(example_ip, example_port)
+    t = AngieTask(example_port, example_ip)
 
     if t.get_ip() == example_ip and t.get_port() == example_port:
         test_pass = True
@@ -32,5 +32,5 @@ def test_las_id_son_distintas_y_consecutivas():
         a = AngieTask(example_ip,example_port)
         task_list.append(a.get_id())
 
-    test_pass = task_list == list(range(1,n_task+1))
+    test_pass = task_list == list(range(1,n_tasks+1))
     assert test_pass
