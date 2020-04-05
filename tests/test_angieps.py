@@ -9,7 +9,7 @@ from port_scanner import PortScanner
 
 ## AngieTask
 
-def task_se_genera_con_datos_correctos():
+def test_task_se_genera_con_datos_correctos():
     test_pass = False
     example_ip = "192.168.1.1"
     example_port = 80
@@ -20,7 +20,7 @@ def task_se_genera_con_datos_correctos():
 
     assert test_pass
 
-def las_id_son_distintas_y_consecutivas():
+def test_las_id_son_distintas_y_consecutivas():
     test_pass = False
     n_tasks = 5
     example_ip = "192.168.1.1"
