@@ -16,3 +16,5 @@ El proyecto se plantea desde el principio como un proyecto de ingeniería del so
 Además se decide crear una infraestructura de trabajo automatizada con desarrollo basado en test y sistemas de integración continua que facilitan la incorporación de mejoras evitando posibles errores que inmediatamente no cumplan con los requisitos inicialmente propuestos.
 
 ## Herramientas
+
+  - AngiePS
