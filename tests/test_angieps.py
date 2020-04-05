@@ -28,7 +28,7 @@ def test_las_id_son_distintas_y_consecutivas():
 
     task_list = []
    
-    for i in range(1,n_task+1):
+    for i in range(1,n_tasks+1):
         a = AngieTask(example_ip,example_port)
         task_list.append(a.get_id())
 
