@@ -1,2 +1,0 @@
-def ejemplo():
-    return True

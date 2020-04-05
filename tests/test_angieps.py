@@ -1,7 +1,11 @@
 import sys
-
 sys.path.append('/home/travis/build/jdafer98/AngieSF/angieps')
-import ejemplo
+
+
+import angie_colors
+import angieps
+import angie_task
+import port_scanner
 
 
 def test_se_crean_todos_los_campos():
