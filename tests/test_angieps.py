@@ -67,7 +67,7 @@ def test_init_queue():
             if r != 0:
                 test_pass = False
     else:
-        test_pass = False
+        test_pass = True
     
     assert test_pass
 
