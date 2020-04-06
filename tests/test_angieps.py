@@ -84,9 +84,8 @@ def test_lookup():
     ps = PortScanner('example.com',1,1024,True)
     test_pass = False
 
-    try:
-        if ps.lookup() == assertion:
-            test_pass = True
+    if ps.lookup() == assertion:
+        test_pass = True
 
     assert test_pass
 
