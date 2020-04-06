@@ -52,3 +52,22 @@ def test_scan_port():
 def test_ping():
     host = 'www.google.es'
     assert Mole.ping(host)
+
+## PortScanner
+
+def test_init_queue():
+    test_pass = True
+    ps = PortScanner('127.0.0.1',1,1024,False)
+    ps.init_queue()
+
+    res = ps.make_report()
+
+    if len(res) == 1024:
+        for r in res:
+            if r != [False,0]:
+                test_pass = False
+    else:
+        test_pass = False
+    
+    assert test_pass
+
