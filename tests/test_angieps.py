@@ -55,7 +55,7 @@ def test_ping():
 
 ## PortScanner
 
-def test_init_queue():
+def test_init_queue_y_make_report():
     test_pass = True
     ps = PortScanner('127.0.0.1',1,1024,False)
     ps.init_queue()
@@ -65,5 +65,17 @@ def test_init_queue():
     if not len(res) == 0:
         test_pass = False
     
+    assert test_pass
+
+def test_parse_ipmask():
+    test_pass = True
+    ps = PortScanner('127.0.0.1',1,1024,False)
+
+    ips = ['192.168.1.1/24','192.168.1.129/31','10.9.122.167/16','5.0.5.0/8']
+    assertions = ['192.168.1.0','192.168.1.128','10.9.0.0','5.0.0.0']
+
+    for i,j in zip(ips,assertions):
+        if not ps.parse_ipmask(i) == j:
+            test_pass = False
     assert test_pass
 
