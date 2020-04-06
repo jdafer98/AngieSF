@@ -84,7 +84,7 @@ def test_lookup():
     ps = PortScanner('www.google.es',1,1024,True)
     test_pass = False
 
-    if ps.lookup() == assertion:
+    if ps.lookup() == '172.217.17.3':
         test_pass = True
 
     assert test_pass    
