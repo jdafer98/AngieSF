@@ -87,6 +87,6 @@ def test_lookup():
     if ps.lookup() == assertion:
         test_pass = True
 
-    return test_pass    
+    assert test_pass    
 
 
