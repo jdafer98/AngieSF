@@ -23,7 +23,7 @@ class PortScanner:
 
     def init_queue(self):
 
-        default_value = [False,0]
+        default_value = [0,False]
         qq = self.lookup()
         if not self.sweep_mode:
 

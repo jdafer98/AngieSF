@@ -62,11 +62,7 @@ def test_init_queue():
 
     res = ps.make_report()
 
-    if len(res) == 1024:
-        for r in res:
-            if r != 0:
-                test_pass = False
-    else:
+    if not res:
         test_pass = False
     
     assert test_pass
