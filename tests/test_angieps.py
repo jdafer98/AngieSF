@@ -85,7 +85,7 @@ def test_lookup():
     test_pass = False
 
     try:
-        if ps.lookup() == assertion or ps.lookup() == 'Ich':
+        if ps.lookup() == assertion or ps.lookup() == -2:
             test_pass = True
 
     assert test_pass
