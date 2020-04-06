@@ -64,7 +64,7 @@ def test_init_queue():
 
     if len(res) == 1024:
         for r in res:
-            if r != [False,0]:
+            if r != 0:
                 test_pass = False
     else:
         test_pass = False
