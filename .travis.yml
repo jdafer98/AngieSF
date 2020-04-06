@@ -9,4 +9,8 @@ install:
  - pip install --upgrade pytest
  - pwd
 
+addons:
+  hosts:
+    - example.com
+
 script: pytest

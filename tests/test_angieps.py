@@ -80,12 +80,12 @@ def test_parse_ipmask():
     assert test_pass
 
 def test_lookup():
-    assertion = '172.217.17.3'
-    ps = PortScanner('www.google.es',1,1024,True)
+    assertion = '127.0.0.1'
+    ps = PortScanner('example.com',1,1024,True)
     test_pass = False
 
     try:
-        if ps.lookup() == assertion or ps.lookup() == -2:
+        if ps.lookup() == assertion:
             test_pass = True
 
     assert test_pass
