@@ -23,13 +23,14 @@ class PortScanner:
 
     def init_queue(self):
 
+        default_value = [False,0]
         qq = self.lookup()
         if not self.sweep_mode:
 
             for i in range(self.ini_port, self.end_port+1):
                 t = AngieTask(i,qq)
                 self.task_queue.put(t)
-                self.results.append([False,0])
+                self.results.append(default_value)
         else:
             ipmask = self.parse_ipmask(qq)
             ipbase = ipmask[0]
@@ -40,7 +41,7 @@ class PortScanner:
             for i in range(0,2**(32-mask)):
                 t = AngieTask(0,str(my_ipbase+i))
                 self.task_queue.put(t)
-                self.results.append([0,False])
+                self.results.append(default_value)
                 
 
     def set_verbose(self,v):
