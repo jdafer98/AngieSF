@@ -75,7 +75,7 @@ def test_parse_ipmask():
     assertions = ['192.168.1.0','192.168.1.128','10.9.0.0','5.0.0.0']
 
     for i,j in zip(ips,assertions):
-        if not ps.parse_ipmask(i) == j:
+        if not ps.parse_ipmask(i)[0] == j:
             test_pass = False
     assert test_pass
 
