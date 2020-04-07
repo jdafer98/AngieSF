@@ -5,15 +5,6 @@ from datetime import datetime
 
 class Mole(threading.Thread):
 
-    """ Clase que define el comportamiento de una hebra que realiza una tarea de escaneo a un puerto especificado 
-    
-        @param (Integer) port: Puerto objetivo
-        @param (string) host: Ip o nombre de dominio del host objetivo.
-        @param (boolean) dn: Verdadero si el argumento host es un nombre de dominio. Falso en caso contrario
-    
-    
-    """
-
     def __init__(self, f,a): 
         super().__init__(target=f,args=a)
         self.verbose = False
@@ -26,7 +17,7 @@ class Mole(threading.Thread):
 
         exit_value = False
         if v:
-            print(AngieColors.DEFAULT)   
+            print(AngieColors.DEFAULT)
 
 
         if ip != None:
@@ -70,7 +61,6 @@ class Mole(threading.Thread):
         return [port, exit_value]
 
     def ping(host):
-        """ Petición ICMP al host especificado como parámetro """
         response = os.system("ping -c 1 " + host + " > /dev/null")
         return response == 0
 
