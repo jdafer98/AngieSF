@@ -135,22 +135,147 @@ Mole
    - Devuelve un booleano que será verdadero si el host está activo (si se recibe un echo request). Falso en caso contrario.
 
  
-Mole
-~~~~
-   Representa una versión de una thread de python con funcionalidad extendida, adaptada para los propósitos de la aplicación.
+PortScanner
+~~~~~~~~~~~
+
+   Agrupa una lista de tareas (instancias de AngieTask) a realizar y una colección de hebras (Instancias de Mole) que las ocupan, las realizan y devuelven resultados ciclicamente. Además incorpora toda la funcionalidad y la lógica necesaria para hacer los escaneo de puertos.
 
    **Atributos de la clase:**
    
-   ``verbose:`` Indica la salida por pantalla de mensajes de *feedback*. Vale True o False
+   ``task_queue:`` Representa una cola de instancias de AngieTask.
 
-   ``target`` y ``args`` son dos variables propias del módulo threading nativo de python pero también es utilizado por la herramienta.
+   ``results:`` Es una lista que contendrá los resultados ([puerto,estado]. Donde puerto es un entero y estado es un booleano.) provenientes del escaneo de un puerto.
+
+   ``host:`` Cadena de caracteres que representan el host objetivo al que se desea realizar le escaneo. Puede ser un nombre de dominio o una ip.
+
+   ``ini_port:`` Entero que representa el puerto inicial del rango de puertos a escanear.
+
+   ``end_port:`` Entero que representa el puerto final del rango de puertos a escanear.
+
+   ``nmoles:`` Numero de Moles (hebras) con las que se realizará el escaneo. Por defecto 5.
+
+   ``dn:`` Booleano que representa si el host se proporciona como nombre de dominio.
+
+   ``verbose:`` Booleano. *Feedback* por pantalla o no.
+
+   ``sweep_mode:`` Booleano que indica si el escaneo se realiza en modo barrido. El modo barrido ignora los puertos y se demanda el host en modo ip/mask. El resultado solo informa que host están activos en esa red.
 
    **Funcionalidad de la clase:**
 
-   ``Mole(f,a):`` 
+   ``PortScanner(host,ini_port,end_port,dn):`` 
    
    - Constructor de la clase. 
    
-   - *f* es una referencia a la función que se deseé que la hebra ejecute y *args* son los argumentos de dicha función.
+   - Los parámetros formales son idénticos a los atributos de clase con el mismo nombre.
 
-   - devuelve una instancia de Mole.
+   - devuelve una instancia de PortScanner.
+
+   ``init_queue()``
+
+   - Método de instancia que inicializa en función de los atributos de dicha instancia la cola de tareas, creando y añadiendo AngieTasks por cada puerto especificado.
+
+   - No tiene parámetros formales.
+
+   - Devuelve None.
+
+   ``set_verbose(v)``
+
+   - Asigna el valor dado a la variable verbose.
+
+   - *v* es un booleano que vale True si se desea el modo verbose. False en caso contrario.
+
+   - Devuelve None.
+
+   ``set_sweep_mode(sm)``
+
+   - Asigna el valor dado a la variable sweep_mode.
+
+   - *sm* es un booleano que vale True si se desea realizar un barrido en modo sweep_mode. False en caso contrario.
+
+   - Devuelve None.
+
+   ``fmole(q,results,v,sm)``
+
+   - Función que ejecuta una mole. Dependiendo de si sweep_mode está activo, realizará un escaneo de puertos a un host o un barrido a una red determinada. Cada hebra coge una tarea y la realiza. Al finalizar informa de que ha terminado y coge otra tarea si el número de tareas no está vacío.
+
+   - *q* es la cola de tareas, *results* es la lista donde se devolverán los resultados, *v* es un booleano (verbose) y sm es también un booleano (sweep_mode).
+   - Devuelve None
+
+   ``parse_ipmask(ipmask)``
+
+   - Se encarga de coger una ip/mascara_red y devolver la dirección de la primera ip de esa red (la dirección de la propia red). El cálculo brevemente consiste en realizar una operación & entre la máscara y la direción dada. En realidad se trabaja solo con el octeto que resulta de hacer mascara módulo 8 pero el concepto es el mísmo.
+
+   - El parámetro de entrada es una cadena de caracteres que representa una dirección ip con su máscara de red correspondiente.
+
+   - devuelve una lista [final_ip,mask] que representa la primera ip de la subred y la máscara que fue proporcionada en un origen.
+
+   ``make_report()``
+
+   - Elabora un resumen en base a los resultados que ha proporcionado cada hebra. En caso de ser un escaneo de puertos, informa sobre los puertos abiertos. En caso de ser un escaneo de hosts activos, informa sobre que host responden a peticiones icmp.
+
+   - No tiene parámetros formáles.
+
+   - Devuelve una lista con todos los hosts o puertos que dan positivo en el escaneo realizado.
+
+   ``launch_moles()``
+
+   - Función que inicializa toda la lista de moles de la instancia PortScanner. Posteriormente quedará en espera bloqueada hasta que todas las moles terminen su función.
+
+   - No tiene parámetros formales
+
+   - Devuelve None.
+
+   ``set_nmoles(n):``
+
+   - asigna el valor n a la variable de instancia nmoles de la clase PortScanner.
+
+   - *n* es un entero que representa el número de moles deseadas.
+
+   - Devuelve None.
+
+   ``lookup():``
+
+   - Resuelve un nombre de dominio si la variable de instancia *dn* de la clase PortScanner está activa. El nombre de dominio debe especificarse en la variable de instancia *host*.
+
+   - No tiene parámetros formales.
+
+   - Devuelve una cadena de caracteres que representa la ip resultado de la consulta DNS del nombre de dominio.
+
+   ``begin_scan()``
+
+   - Función que prepara todo el proceso de escaneo y lanza las hebras. También calcula el tiempo de ejecución de todo el proceso y muestra los resultados por pantalla. Es la función estandar a ejecutar después de crear una instancia PortScanner.
+
+   - No tiene parámetros formales.
+
+   - Devuelve None.
+
+   ``begin_sweep()``
+
+   - Análoga a *begin_scan()* pero esta vez se realizará un barrido a la ip/máscara especificada en la variable de instancia *host*.
+
+   - No tiene parámetros formales.
+
+   - Devuelve None.
+
+AngieColors
+~~~~~~~~~~~
+
+   Adicionalmente existe un módulo llamado AngieColors que no representa funcionalidad pero es utilizado como variable enumerada para imprimir colores por pantalla. Sus opciones son:
+
+   - DEFAULT
+   - HEADER
+   - OKBLUE
+   - OKGREEN
+   - WARNING
+   - FAIL
+   - ENDC
+   - BOLD
+   - UNDERLINE
+
+   En especial, ENDC no es un color, sino que desactiva las modificaciones hechas anteriormente.
+
+   Un ejemplo de su uso puede ser::
+
+    print(AngieColors.OKGREEN + "Texto en verde")
+
+
