@@ -1,6 +1,6 @@
 ## AngiePS
 
-Escáner de puertos sencillo como parte del framework AngieSF
+Escáner de puertos sencillo como parte del framework AngieSF.
 
 # Requisitos funcionales
 
