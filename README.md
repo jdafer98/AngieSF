@@ -1,5 +1,5 @@
 # AngieSF
-Proyecto presentado como trabajo de fin de grado de ingeniería informática en la universidad de Granada.
+Proyecto presentado como trabajo de fin de grado de ingeniería informática en la universidad de Granada
 
 ![Docker-1](https://github.com/jdafer98/AngieSF/blob/master/images/AngieSF_logo.png)
 
