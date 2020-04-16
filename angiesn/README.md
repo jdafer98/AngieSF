@@ -12,6 +12,11 @@ Sniffer ligero como parte del framework AngieSF.
 
  - RF4: El software debe permitir el examen de las cabeceras de los paquetes que capture.
 
+ - RF5: El software debe incorporar un mecanismo para detener la captura con una tecla.
+
+ - RF6: El software debe ser capaz de guardar la captura de paquetes en un fichero pcap.
+
 ## Requisitos no funcionales
 
- - El software debe presentar los datos de una forma amigable al usuario.
+ - RNF1: El software debe presentar los datos de los paquetes de forma "Human-Readable".
+ - RNF2: Los paquetes deben ser capturados en tiempo real.

@@ -4,6 +4,8 @@ Angie Port Scanner
 Descripción
 ^^^^^^^^^^^
    Angie Port Scanner es un escáner de puertos basado en linea de comandos que aprovecha el paralelismo del ordenador para explorar servicios activos en un host especificado. En general, la herramienta considera la exploración de un puerto como una tarea y las dispone en una cola. Los moles extraen las tareas de la cola, las procesan, y guardan el resultado. Si quedan más tareas en la cola, cogerán otra más.
+
+   La libreria utilizada para hacer la interfaz cli es click (https://click.palletsprojects.com/en/7.x/). También hace uso de la librería Threading nativa de python.
    
 Uso básico
 ^^^^^^^^^^
