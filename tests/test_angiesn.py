@@ -26,3 +26,20 @@ def test_seleccion_interfaz():
     sn.select_iface(if_example)
     test_pass = (sn.selected_iface == if_example)
     assert test_pass
+
+def test_lanzar_hebra():
+    test_pass = False
+    sn = Sniffer()
+
+    a = sn.waiting_thread()
+    test_pass = test_pass == 0
+
+    assert test_pass
+
+def inter_packet_correcto():
+    test_pass = False
+    sn = Sniffer()
+
+    sn.inter()
+
+    test_pass = (self.count == 1)
