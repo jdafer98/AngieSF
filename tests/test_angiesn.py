@@ -27,15 +27,6 @@ def test_seleccion_interfaz():
     test_pass = (sn.selected_iface == if_example)
     assert test_pass
 
-def test_lanzar_hebra():
-    test_pass = False
-    sn = Sniffer()
-
-    a = sn.waiting_thread()
-    test_pass = test_pass == 0
-
-    assert test_pass
-
 def inter_packet_correcto():
     test_pass = False
     sn = Sniffer()

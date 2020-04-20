@@ -17,12 +17,6 @@ class Sniffer:
     def select_iface(self,i):
         self.selected_iface = i
 
-    def waiting_thread(self):
-        t = threading.Thread(target=self.wait_for_signal(),daemon=True)
-        t.start()
-        return 0
-
-
     def inter(self,x):
         print("PACKET #{}: \n".format(self.count) + x.summary())
         self.count = self.count + 1
