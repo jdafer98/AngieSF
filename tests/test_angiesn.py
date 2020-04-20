@@ -16,3 +16,13 @@ def test_se_detectan_interfaces():
         test_pass = True
 
     assert test_pass
+
+
+def test_seleccion_interfaz():
+    test_pass = False
+    sn = Sniffer()
+    if_example = 'example'
+
+    sn.select_interface(if_example)
+    test_pass = (sn.selected_iface == if_example)
+    assert test_pass
