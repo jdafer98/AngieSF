@@ -3,3 +3,4 @@ click
 fabric
 ipython
 scapy
+keyboard
