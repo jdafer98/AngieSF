@@ -1,283 +1,100 @@
-Angie Port Scanner
+Angie Sniffer
 ==================
 
 Descripción
 ^^^^^^^^^^^
-   Angie Port Scanner es un escáner de puertos basado en linea de comandos que aprovecha el paralelismo del ordenador para explorar servicios activos en un host especificado. En general, la herramienta considera la exploración de un puerto como una tarea y las dispone en una cola. Los moles extraen las tareas de la cola, las procesan, y guardan el resultado. Si quedan más tareas en la cola, cogerán otra más.
+   Angie Sniffer es un analizador de paquetes ligero escrito en python que provee toda la funcionalidad necesaria para captar tráfico de red y analizar cabeceras de paquetes, puertos destino, origen, tamaño de los paquetes y otra información que puede resultar útil para conocer que ocurre en la red y realizar estudios estadísticos con el fin de optimizar el flujo de información de tu infraestructura. Tan solo es necesario ejecutar el programa en un interfaz y analizar el paquete deseado.
 
-   La libreria utilizada para hacer la interfaz cli es click (https://click.palletsprojects.com/en/7.x/). También hace uso de la librería Threading nativa de python.
-   
+   La biblioteca principal que hace la abstracción de la tarjeta de red utilizada es *scapy* (https://scapy.readthedocs.io/en/latest/). Tambien hace uso de la libreria nativa de python *Threading*
+
 Uso básico
 ^^^^^^^^^^
-   Siempre es posible ejecutar el siguiente trozo de código para explorar la funcionalidad de la herramienta::
+   Para ejecutar AngieSN simplemente usa::
+    
+    sudo python3 angiesn
+
+   **(es necesario poseer privilegios de superusuario)**
+
+   Una vez hecho esto, angieSN detectará automáticamente los interfaces de los que dispone el equipo que lo ejecuta. Escribiendo el nombre del interfaz y pulstando <enter>, angiesn comenzará a capturar tráfico entrante y saliente del interfaz deseado. Manteniendo pulsado <ctrl izq> el proceso dejará de capturar tráfico.
+   Seguidamente, nos encontramos un proceso iterativo donde angiesn pregunta por un paquete a analizar (todos identificados por un número). Escribiendo el número de paquete, el software nos proporciona toda la información que puede sernos útil acerca de ese paquete en concreto.
+   Cuando no se desee analizar más paquetes, sencillamente escribiremos "no" o "n" en la terminal. 
+   Es posible que deseemos guardar la captura de paquetes para analizarla más tarde con otra herramienta, o hacer gráficos y otros estudios. Angiesn nos pregunta al final si deseamos guardar nuestra captura en un fichero pcap y el nombre de destino del fichero.
    
-    python3 angieps.py --help
-
-   Las opciones más características son::
-
-    --host (IP|DOMAIN_NAME) host objetivo del escáner
-
-    --initial_port INTEGER  puerto de inicio
-
-    --end_port INTEGER      puerto final
-
-    --verbose INTEGER       Muestra más información. 0 off, 1 on
-
-    --moles INTEGER         Numero de moles (hebras) que ejecutan el scaneo en paralelo
-                          
-    --dn INTEGER            El Host es pasado como nombre de dominio. 0 off, 1 on
-
-    --sweep INTEGER         Modo barrido. Activado, se ignora el rango de puertos y el host debe pasarse en formato ip/host. 0 off, 1 on.
-
-   Un uso recurrente de la herramienta puede ser analizar los primeros 1024 puertos de un host concreto::
-
-    python3 angieps.py --host 192.168.1.100 --ini_port 1 --end_port 1024 --moles 512
-
-   también es posible ejecutar una resolución de nombre de dominio de un host con la opción ``--dn`` puesta a 1::
-
-    python3 angieps.py --host www.example.com --ini_port 1 --end_port 1024 --moles 512 --dn 1
-
-   Asímismo puede usarse la herramienta para detectar que hosts están activos en una red::
-
-    python3 angieps.py --sweep 1 --moles 512 --host 192.168.0.0/24
 
 Clases
 ^^^^^^
    A continuación se presenta una breve descripción de cada una de las clases y la funcionalidad que presentan.
 
-AngieTask
-~~~~~~~~~
-   AngieTask es la estructura de datos básica que representa un puerto de un host a escanear. También puede representar una ip de un host que deseamos comprobar si está activo. En este último caso se ignora el puerto.
+Sniffer
+~~~~~~~
+
+   La clase *Sniffer* es la clase que proporciona toda la funcionalidad necesaria para capturar el tráfico de red, detectar interfaces y en general llevar el flujo de control del proceso de captura. Una instancia de esta clase dentro de una funcion principal, es de hecho todo lo necesario para conformar esta herramienta.
 
    **Atributos de la clase:**
    
-   ``current_task_id:`` Es una variable auxiliar para autogenerar las ids de las tareas.
+   ``selected_iface:`` (string) Cadena de caracteres que representa el nombre del interfaz sobre el que se realizará la captura de tráfico.
 
-   ``task_port:`` Puerto del host que se desea escanear.
+   ``total_rows:`` (list:packets) Conjunto de todos los paquetes que se capturan.
 
-   ``task_id:`` Es la variable que identifica a la tarea. Es autogenerada cuando se construye la instancia.
+   ``signal:`` (boolean) variablle de control que se utiliza para enviar una notificación al proceso de captura. Normalmente utilizada para indicar la prada del proceso.
 
-   **Funcionalidad de la clase:**
-
-   ``AngieTask(p,ip):`` 
-   
-   - Constructor de la clase. 
-   
-   - *p* es el puerto a escanear mientras que *ip* es la ip del host objetivo.
-
-   - devuelve una instancia de AngieTask.
-
-   ``get_port():``
-
-   - Devuelve el puerto propio de la instancia.
-
-   - No tiene parámetros formales.
-
-   - devuelve un entero correspondiente al puerto de entrada.
-
-   ``get_ip():``
-
-   - Devuelve la ip propia de la instancia.
-
-   - No tiene parámetros formales.
-
-   - Devuelve una cadena de caracteres correspondiente a la ip de la tarea.
-
-   ``get_id():``
-
-   - Devuelve la identificación propia de la tarea.
-
-   - No tiene parámetros formales.
-
-   - Devuelve un entero correspondiente a la id de la tarea.
-
-
-Mole
-~~~~
-   Representa una versión de una thread de python con funcionalidad extendida, adaptada para los propósitos de la aplicación.
-
-   **Atributos de la clase:**
-   
-   ``verbose:`` Indica la salida por pantalla de mensajes de *feedback*. Vale True o False
-
-   ``target`` y ``args`` son dos variables propias del módulo threading nativo de python pero también es utilizado por la herramienta.
+   ``count:`` (int) Es la variable que toma la cuenta de todos los paquetes capturados.
 
    **Funcionalidad de la clase:**
 
-   ``Mole(f,a):`` 
+   ``Sniffer():`` 
    
    - Constructor de la clase. 
    
-   - *f* es una referencia a la función que se deseé que la hebra ejecute y *args* son los argumentos de dicha función.
+   - No tiene parámetros de entrada.
 
-   - devuelve una instancia de Mole.
+   - devuelve una instancia de Sniffer.
 
-   ``set_verbose(v):``
+   ``detect_ifaces():``
 
-   - asigna el valor proporcionado a la variable verbose de la instancia Mole.
+   - Método que devuelve una cadena de carácteres que representa los interfaces detectados en el equipo.
 
-   - *v* es un booleano que representa la presencia de los mensajes por salida estandar o no.
+   - No tiene parámetros formales.
 
-   - devuelve None.
+   - devuelve un string correspondiente a los interfaces detectados.
 
-   ``scan_port(ip,port,v):``
+   ``select_iface(i):``
 
-   - Método de clase que informa acerca del estado de un puerto.
+   - Modifica la variable de instancia *selected_iface* para indicar que un nuevo interfaz ha sido selecionado.
 
-   - *ip* es una cadena de caracteres que representa la ip del host objetivo, *port* es un entero que representa el puerto a probar y *v* es un booleano que hace que la función proporcione output o no.
+   - *i* es la cadena de caracteres que representa el interfaz que se desea selecionar.
 
-   - Devuelve una lista con dos valores [p,e], que corresponden con un entero representando un puerto y un booleano que informa si el puerto está cerrado o no.
-   
-   ``ping(host)``
+   - Devuelve None.
 
-   - Envia un paquete ICMP Echo Request a un host especificado como argumento. Puede ser una ip o un nombre de dominio.
+   ``waiting_thread():``
 
-   - *host* es una cadena de caracteres que representa un host o un nombre de dominio que identifican al host objetivo.
-
-   - Devuelve un booleano que será verdadero si el host está activo (si se recibe un echo request). Falso en caso contrario.
-
- 
-PortScanner
-~~~~~~~~~~~
-
-   Agrupa una lista de tareas (instancias de AngieTask) a realizar y una colección de hebras (Instancias de Mole) que las ocupan, las realizan y devuelven resultados ciclicamente. Además incorpora toda la funcionalidad y la lógica necesaria para hacer los escaneo de puertos.
-
-   **Atributos de la clase:**
-   
-   ``task_queue:`` Representa una cola de instancias de AngieTask.
-
-   ``results:`` Es una lista que contendrá los resultados ([puerto,estado]. Donde puerto es un entero y estado es un booleano.) provenientes del escaneo de un puerto.
-
-   ``host:`` Cadena de caracteres que representan el host objetivo al que se desea realizar le escaneo. Puede ser un nombre de dominio o una ip.
-
-   ``ini_port:`` Entero que representa el puerto inicial del rango de puertos a escanear.
-
-   ``end_port:`` Entero que representa el puerto final del rango de puertos a escanear.
-
-   ``nmoles:`` Numero de Moles (hebras) con las que se realizará el escaneo. Por defecto 5.
-
-   ``dn:`` Booleano que representa si el host se proporciona como nombre de dominio.
-
-   ``verbose:`` Booleano. *Feedback* por pantalla o no.
-
-   ``sweep_mode:`` Booleano que indica si el escaneo se realiza en modo barrido. El modo barrido ignora los puertos y se demanda el host en modo ip/mask. El resultado solo informa que host están activos en esa red.
-
-   **Funcionalidad de la clase:**
-
-   ``PortScanner(host,ini_port,end_port,dn):`` 
-   
-   - Constructor de la clase. 
-   
-   - Los parámetros formales son idénticos a los atributos de clase con el mismo nombre.
-
-   - devuelve una instancia de PortScanner.
-
-   ``init_queue()``
-
-   - Método de instancia que inicializa en función de los atributos de dicha instancia la cola de tareas, creando y añadiendo AngieTasks por cada puerto especificado.
+   - Función que lanza una hebra que recibirá la petición de parada del proceso de captura.
 
    - No tiene parámetros formales.
 
    - Devuelve None.
 
-   ``set_verbose(v)``
+   ``inter(x):``
 
-   - Asigna el valor dado a la variable verbose.
+   - Método privado de instancia que realiza una operación con el último paquete capturado
 
-   - *v* es un booleano que vale True si se desea el modo verbose. False en caso contrario.
+   - *x* es un paquete.
+
+   - Devuelve None.
+    
+   ``sniff_pcks(n,f):``
+
+   - método que comienza un proceso de captura de paquetes. Es posible especificar un número de paquetes y un filtro.
+
+   - *n* es el número de paquetes a sniffar y f es un filtro con sintáxis BPF.
 
    - Devuelve None.
 
-   ``set_sweep_mode(sm)``
 
-   - Asigna el valor dado a la variable sweep_mode.
+   ``begin_sniff(f):``
 
-   - *sm* es un booleano que vale True si se desea realizar un barrido en modo sweep_mode. False en caso contrario.
+   - Método que lleva acabo todo el proceso de sniffado de paquetes, gestionando el análisis posterior de los paquetes capturados y el guardado en un archivo pcap.
 
-   - Devuelve None.
-
-   ``fmole(q,results,v,sm)``
-
-   - Función que ejecuta una mole. Dependiendo de si sweep_mode está activo, realizará un escaneo de puertos a un host o un barrido a una red determinada. Cada hebra coge una tarea y la realiza. Al finalizar informa de que ha terminado y coge otra tarea si el número de tareas no está vacío.
-
-   - *q* es la cola de tareas, *results* es la lista donde se devolverán los resultados, *v* es un booleano (verbose) y sm es también un booleano (sweep_mode).
-   - Devuelve None
-
-   ``parse_ipmask(ipmask)``
-
-   - Se encarga de coger una ip/mascara_red y devolver la dirección de la primera ip de esa red (la dirección de la propia red). El cálculo brevemente consiste en realizar una operación & entre la máscara y la direción dada. En realidad se trabaja solo con el octeto que resulta de hacer mascara módulo 8 pero el concepto es el mísmo.
-
-   - El parámetro de entrada es una cadena de caracteres que representa una dirección ip con su máscara de red correspondiente.
-
-   - devuelve una lista [final_ip,mask] que representa la primera ip de la subred y la máscara que fue proporcionada en un origen.
-
-   ``make_report()``
-
-   - Elabora un resumen en base a los resultados que ha proporcionado cada hebra. En caso de ser un escaneo de puertos, informa sobre los puertos abiertos. En caso de ser un escaneo de hosts activos, informa sobre que host responden a peticiones icmp.
-
-   - No tiene parámetros formáles.
-
-   - Devuelve una lista con todos los hosts o puertos que dan positivo en el escaneo realizado.
-
-   ``launch_moles()``
-
-   - Función que inicializa toda la lista de moles de la instancia PortScanner. Posteriormente quedará en espera bloqueada hasta que todas las moles terminen su función.
-
-   - No tiene parámetros formales
+   - *f* es un filtro BPF que utiliza el método para seleccionar el tráfico filtrado.
 
    - Devuelve None.
-
-   ``set_nmoles(n):``
-
-   - asigna el valor n a la variable de instancia nmoles de la clase PortScanner.
-
-   - *n* es un entero que representa el número de moles deseadas.
-
-   - Devuelve None.
-
-   ``lookup():``
-
-   - Resuelve un nombre de dominio si la variable de instancia *dn* de la clase PortScanner está activa. El nombre de dominio debe especificarse en la variable de instancia *host*.
-
-   - No tiene parámetros formales.
-
-   - Devuelve una cadena de caracteres que representa la ip resultado de la consulta DNS del nombre de dominio.
-
-   ``begin_scan()``
-
-   - Función que prepara todo el proceso de escaneo y lanza las hebras. También calcula el tiempo de ejecución de todo el proceso y muestra los resultados por pantalla. Es la función estandar a ejecutar después de crear una instancia PortScanner.
-
-   - No tiene parámetros formales.
-
-   - Devuelve None.
-
-   ``begin_sweep()``
-
-   - Análoga a *begin_scan()* pero esta vez se realizará un barrido a la ip/máscara especificada en la variable de instancia *host*.
-
-   - No tiene parámetros formales.
-
-   - Devuelve None.
-
-AngieColors
-~~~~~~~~~~~
-
-   Adicionalmente existe un módulo llamado AngieColors que no representa funcionalidad pero es utilizado como variable enumerada para imprimir colores por pantalla. Sus opciones son:
-
-   - DEFAULT
-   - HEADER
-   - OKBLUE
-   - OKGREEN
-   - WARNING
-   - FAIL
-   - ENDC
-   - BOLD
-   - UNDERLINE
-
-   En especial, ENDC no es un color, sino que desactiva las modificaciones hechas anteriormente.
-
-   Un ejemplo de su uso puede ser::
-
-    print(AngieColors.OKGREEN + "Texto en verde")
-
-
