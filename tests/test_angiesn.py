@@ -23,6 +23,6 @@ def test_seleccion_interfaz():
     sn = Sniffer()
     if_example = 'example'
 
-    sn.select_interface(if_example)
+    sn.select_iface(if_example)
     test_pass = (sn.selected_iface == if_example)
     assert test_pass
