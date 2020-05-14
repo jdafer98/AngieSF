@@ -1,36 +1,48 @@
 import sys
-sys.path.append('/home/travis/build/jdafer98/AngieSF/angiesn')
+sys.path.append('/home/travis/build/jdafer98/AngieSF/angiearpf')
 
-from sniffer import Sniffer
+from spoofer import Spoofer
 
-## AngieTask
 
-def test_se_detectan_interfaces():
+def test_set_router_ip():
     test_pass = False
-    sn = Sniffer()
-    res = []
+    sp = Spoofer()
+    s = "127.0.0.1"
 
-    res = sn.detect_ifaces()
+    sp.set_router_ip(s)
+
+    test_pass = sp.router_mac == s
+
+    assert test_pass
+
+def test_set_target_ip():
+    test_pass = False
+    sp = Spoofer()
+    s = "127.0.0.1"
+
+    sp.set_target_ip(s)
+
+    test_pass = sp.target_mac == s
+
+    assert test_pass
+
+def test_spoof():
+    test_pass = False
+    sp = Spoofer()
+    s = "127.0.0.1"
+
+    sp.set_router_ip(s)
+    sp.set_target_ip(s)
+    sp.spoof()
+
+    assert True
+
+def test_req_mac():
+    sp = Spoofer()
+    s = "127.0.0.1"
     
-    if res:
-        test_pass = True
+    sp.request_mac(s)
 
-    assert test_pass
+    assert True
 
 
-def test_seleccion_interfaz():
-    test_pass = False
-    sn = Sniffer()
-    if_example = 'example'
-
-    sn.select_iface(if_example)
-    test_pass = (sn.selected_iface == if_example)
-    assert test_pass
-
-def inter_packet_correcto():
-    test_pass = False
-    sn = Sniffer()
-
-    sn.inter()
-
-    test_pass = (self.count == 1)
