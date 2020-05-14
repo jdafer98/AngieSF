@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/home/travis/build/jdafer98/AngieSF/angiearpf')
+sys.path.append('/home/travis/build/jdafer98/AngieSF/angiearps')
 
 from spoofer import Spoofer
 
