@@ -39,7 +39,7 @@ def test_send_https():
     r = Repeater()
     q = r.read_from_file(name)
 
-    qq = r.send_http(q,'www.youtube.com',443)
+    qq = r.send_https(q,'www.youtube.com',443)
 
     assert qq.find('200') != -1
 
