@@ -14,7 +14,7 @@ def test_se_detectan_interfaces():
     assert test_pass
 
 def test_read_from_file():
-    name = 'ehttp'
+    name = '/home/travis/build/jdafer98/AngieSF/angierp/ehttp'
 
     r = Repeater()
     q = r.read_from_file(name)
@@ -22,7 +22,7 @@ def test_read_from_file():
     assert q.find('HTTP') != -1
 
 def test_send_http():
-    name = 'ehttp'
+    name = '/home/travis/build/jdafer98/AngieSF/angierp/ehttp'
 
     test_pass = False
     r = Repeater()
@@ -33,7 +33,7 @@ def test_send_http():
     assert qq.find('200') != -1
 
 def test_send_https():
-    name = 'ehttps'
+    name = '/home/travis/build/jdafer98/AngieSF/angierp/ehttps'
 
     test_pass = False
     r = Repeater()
