@@ -1,0 +1,10 @@
+GET / HTTP/1.1@@ANGIE_ENDLN
+Host: info.cern.ch@@ANGIE_ENDLN
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0@@ANGIE_ENDLN
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8@@ANGIE_ENDLN
+Accept-Language: en-US,en;q=0.5@@ANGIE_ENDLN
+Accept-Encoding: gzip, deflate@@ANGIE_ENDLN
+DNT: 1@@ANGIE_ENDLN
+Connection: keep-alive@@ANGIE_ENDLN
+Upgrade-Insecure-Requests: 1@@ANGIE_ENDLN@@ANGIE_ENDLN
+
