@@ -1,4 +1,4 @@
-# AngieARPS
+# AngieRP
 
 Herramienta de customización de peticiones HTTP/HTTPS como parte del framework AngieSF.
 
