@@ -5,7 +5,7 @@ import click
 @click.option('--filename', default=None, help='Archivo donde se encuentra el paquete que se desea enviar')
 @click.option('--count', default=1, help='Cuantas veces se desea enviar el paquete. -1 para infinito')
 @click.option('--url', default=None, help='Url del sitio donde se quiere enviar el paquete.')
-@click.option('--port', default=None, help='Puerto donde se desea enviar la petición. 0 desactivado, 1 activado')
+@click.option('--port', default=None, help='Puerto donde se desea enviar la petición.')
 @click.option('--https', default=0, help='https habilitado')
 
 
