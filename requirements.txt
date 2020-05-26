@@ -4,3 +4,4 @@ fabric
 ipython
 scapy
 keyboard
+requests
