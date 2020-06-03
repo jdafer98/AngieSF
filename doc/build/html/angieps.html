@@ -1,0 +1,335 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Angie Port Scanner &#8212; AngieSF 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Title" href="help.html" />
+    <link rel="prev" title="Documentación de AngieSF" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="help.html" title="Title"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Documentación de AngieSF"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AngieSF 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Documentación de AngieSF</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="help.html"
+                        title="next chapter">Title</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="angie-port-scanner">
+<h1>Angie Port Scanner<a class="headerlink" href="#angie-port-scanner" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="descripcion">
+<h2>Descripción<a class="headerlink" href="#descripcion" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Angie Port Scanner es un escáner de puertos basado en linea de comandos que aprovecha el paralelismo del ordenador para explorar servicios activos en un host especificado. En general, la herramienta considera la exploración de un puerto como una tarea y las dispone en una cola. Los moles extraen las tareas de la cola, las procesan, y guardan el resultado. Si quedan más tareas en la cola, cogerán otra más.</p>
+<p>La libreria utilizada para hacer la interfaz cli es click (<a class="reference external" href="https://click.palletsprojects.com/en/7.x/">https://click.palletsprojects.com/en/7.x/</a>). También hace uso de la librería Threading nativa de python.</p>
+</div></blockquote>
+</div>
+<div class="section" id="uso-basico">
+<h2>Uso básico<a class="headerlink" href="#uso-basico" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Siempre es posible ejecutar el siguiente trozo de código para explorar la funcionalidad de la herramienta:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">angieps</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+<p>Las opciones más características son:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">host</span> <span class="p">(</span><span class="n">IP</span><span class="o">|</span><span class="n">DOMAIN_NAME</span><span class="p">)</span> <span class="n">host</span> <span class="n">objetivo</span> <span class="k">del</span> <span class="n">escáner</span>
+
+<span class="o">--</span><span class="n">initial_port</span> <span class="n">INTEGER</span>  <span class="n">puerto</span> <span class="n">de</span> <span class="n">inicio</span>
+
+<span class="o">--</span><span class="n">end_port</span> <span class="n">INTEGER</span>      <span class="n">puerto</span> <span class="n">final</span>
+
+<span class="o">--</span><span class="n">verbose</span> <span class="n">INTEGER</span>       <span class="n">Muestra</span> <span class="n">más</span> <span class="n">información</span><span class="o">.</span> <span class="mi">0</span> <span class="n">off</span><span class="p">,</span> <span class="mi">1</span> <span class="n">on</span>
+
+<span class="o">--</span><span class="n">moles</span> <span class="n">INTEGER</span>         <span class="n">Numero</span> <span class="n">de</span> <span class="n">moles</span> <span class="p">(</span><span class="n">hebras</span><span class="p">)</span> <span class="n">que</span> <span class="n">ejecutan</span> <span class="n">el</span> <span class="n">scaneo</span> <span class="n">en</span> <span class="n">paralelo</span>
+
+<span class="o">--</span><span class="n">dn</span> <span class="n">INTEGER</span>            <span class="n">El</span> <span class="n">Host</span> <span class="n">es</span> <span class="n">pasado</span> <span class="n">como</span> <span class="n">nombre</span> <span class="n">de</span> <span class="n">dominio</span><span class="o">.</span> <span class="mi">0</span> <span class="n">off</span><span class="p">,</span> <span class="mi">1</span> <span class="n">on</span>
+
+<span class="o">--</span><span class="n">sweep</span> <span class="n">INTEGER</span>         <span class="n">Modo</span> <span class="n">barrido</span><span class="o">.</span> <span class="n">Activado</span><span class="p">,</span> <span class="n">se</span> <span class="n">ignora</span> <span class="n">el</span> <span class="n">rango</span> <span class="n">de</span> <span class="n">puertos</span> <span class="n">y</span> <span class="n">el</span> <span class="n">host</span> <span class="n">debe</span> <span class="n">pasarse</span> <span class="n">en</span> <span class="n">formato</span> <span class="n">ip</span><span class="o">/</span><span class="n">host</span><span class="o">.</span> <span class="mi">0</span> <span class="n">off</span><span class="p">,</span> <span class="mi">1</span> <span class="n">on</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Un uso recurrente de la herramienta puede ser analizar los primeros 1024 puertos de un host concreto:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">angieps</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">host</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">1.100</span> <span class="o">--</span><span class="n">ini_port</span> <span class="mi">1</span> <span class="o">--</span><span class="n">end_port</span> <span class="mi">1024</span> <span class="o">--</span><span class="n">moles</span> <span class="mi">512</span>
+</pre></div>
+</div>
+<p>también es posible ejecutar una resolución de nombre de dominio de un host con la opción <code class="docutils literal"><span class="pre">--dn</span></code> puesta a 1:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">angieps</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">host</span> <span class="n">www</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span> <span class="o">--</span><span class="n">ini_port</span> <span class="mi">1</span> <span class="o">--</span><span class="n">end_port</span> <span class="mi">1024</span> <span class="o">--</span><span class="n">moles</span> <span class="mi">512</span> <span class="o">--</span><span class="n">dn</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Asímismo puede usarse la herramienta para detectar que hosts están activos en una red:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">angieps</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">sweep</span> <span class="mi">1</span> <span class="o">--</span><span class="n">moles</span> <span class="mi">512</span> <span class="o">--</span><span class="n">host</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">0.0</span><span class="o">/</span><span class="mi">24</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="clases">
+<h2>Clases<a class="headerlink" href="#clases" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>A continuación se presenta una breve descripción de cada una de las clases y la funcionalidad que presentan.</div></blockquote>
+<div class="section" id="angietask">
+<h3>AngieTask<a class="headerlink" href="#angietask" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>AngieTask es la estructura de datos básica que representa un puerto de un host a escanear. También puede representar una ip de un host que deseamos comprobar si está activo. En este último caso se ignora el puerto.</p>
+<p><strong>Atributos de la clase:</strong></p>
+<p><code class="docutils literal"><span class="pre">current_task_id:</span></code> Es una variable auxiliar para autogenerar las ids de las tareas.</p>
+<p><code class="docutils literal"><span class="pre">task_port:</span></code> Puerto del host que se desea escanear.</p>
+<p><code class="docutils literal"><span class="pre">task_id:</span></code> Es la variable que identifica a la tarea. Es autogenerada cuando se construye la instancia.</p>
+<p><strong>Funcionalidad de la clase:</strong></p>
+<p><code class="docutils literal"><span class="pre">AngieTask(p,ip):</span></code></p>
+<ul class="simple">
+<li>Constructor de la clase.</li>
+<li><em>p</em> es el puerto a escanear mientras que <em>ip</em> es la ip del host objetivo.</li>
+<li>devuelve una instancia de AngieTask.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">get_port():</span></code></p>
+<ul class="simple">
+<li>Devuelve el puerto propio de la instancia.</li>
+<li>No tiene parámetros formales.</li>
+<li>devuelve un entero correspondiente al puerto de entrada.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">get_ip():</span></code></p>
+<ul class="simple">
+<li>Devuelve la ip propia de la instancia.</li>
+<li>No tiene parámetros formales.</li>
+<li>Devuelve una cadena de caracteres correspondiente a la ip de la tarea.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">get_id():</span></code></p>
+<ul class="simple">
+<li>Devuelve la identificación propia de la tarea.</li>
+<li>No tiene parámetros formales.</li>
+<li>Devuelve un entero correspondiente a la id de la tarea.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="mole">
+<h3>Mole<a class="headerlink" href="#mole" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Representa una versión de una thread de python con funcionalidad extendida, adaptada para los propósitos de la aplicación.</p>
+<p><strong>Atributos de la clase:</strong></p>
+<p><code class="docutils literal"><span class="pre">verbose:</span></code> Indica la salida por pantalla de mensajes de <em>feedback</em>. Vale True o False</p>
+<p><code class="docutils literal"><span class="pre">target</span></code> y <code class="docutils literal"><span class="pre">args</span></code> son dos variables propias del módulo threading nativo de python pero también es utilizado por la herramienta.</p>
+<p><strong>Funcionalidad de la clase:</strong></p>
+<p><code class="docutils literal"><span class="pre">Mole(f,a):</span></code></p>
+<ul class="simple">
+<li>Constructor de la clase.</li>
+<li><em>f</em> es una referencia a la función que se deseé que la hebra ejecute y <em>args</em> son los argumentos de dicha función.</li>
+<li>devuelve una instancia de Mole.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">set_verbose(v):</span></code></p>
+<ul class="simple">
+<li>asigna el valor proporcionado a la variable verbose de la instancia Mole.</li>
+<li><em>v</em> es un booleano que representa la presencia de los mensajes por salida estandar o no.</li>
+<li>devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">scan_port(ip,port,v):</span></code></p>
+<ul class="simple">
+<li>Método de clase que informa acerca del estado de un puerto.</li>
+<li><em>ip</em> es una cadena de caracteres que representa la ip del host objetivo, <em>port</em> es un entero que representa el puerto a probar y <em>v</em> es un booleano que hace que la función proporcione output o no.</li>
+<li>Devuelve una lista con dos valores [p,e], que corresponden con un entero representando un puerto y un booleano que informa si el puerto está cerrado o no.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">ping(host)</span></code></p>
+<ul class="simple">
+<li>Envia un paquete ICMP Echo Request a un host especificado como argumento. Puede ser una ip o un nombre de dominio.</li>
+<li><em>host</em> es una cadena de caracteres que representa un host o un nombre de dominio que identifican al host objetivo.</li>
+<li>Devuelve un booleano que será verdadero si el host está activo (si se recibe un echo request). Falso en caso contrario.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="portscanner">
+<h3>PortScanner<a class="headerlink" href="#portscanner" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Agrupa una lista de tareas (instancias de AngieTask) a realizar y una colección de hebras (Instancias de Mole) que las ocupan, las realizan y devuelven resultados ciclicamente. Además incorpora toda la funcionalidad y la lógica necesaria para hacer los escaneo de puertos.</p>
+<p><strong>Atributos de la clase:</strong></p>
+<p><code class="docutils literal"><span class="pre">task_queue:</span></code> Representa una cola de instancias de AngieTask.</p>
+<p><code class="docutils literal"><span class="pre">results:</span></code> Es una lista que contendrá los resultados ([puerto,estado]. Donde puerto es un entero y estado es un booleano.) provenientes del escaneo de un puerto.</p>
+<p><code class="docutils literal"><span class="pre">host:</span></code> Cadena de caracteres que representan el host objetivo al que se desea realizar le escaneo. Puede ser un nombre de dominio o una ip.</p>
+<p><code class="docutils literal"><span class="pre">ini_port:</span></code> Entero que representa el puerto inicial del rango de puertos a escanear.</p>
+<p><code class="docutils literal"><span class="pre">end_port:</span></code> Entero que representa el puerto final del rango de puertos a escanear.</p>
+<p><code class="docutils literal"><span class="pre">nmoles:</span></code> Numero de Moles (hebras) con las que se realizará el escaneo. Por defecto 5.</p>
+<p><code class="docutils literal"><span class="pre">dn:</span></code> Booleano que representa si el host se proporciona como nombre de dominio.</p>
+<p><code class="docutils literal"><span class="pre">verbose:</span></code> Booleano. <em>Feedback</em> por pantalla o no.</p>
+<p><code class="docutils literal"><span class="pre">sweep_mode:</span></code> Booleano que indica si el escaneo se realiza en modo barrido. El modo barrido ignora los puertos y se demanda el host en modo ip/mask. El resultado solo informa que host están activos en esa red.</p>
+<p><strong>Funcionalidad de la clase:</strong></p>
+<p><code class="docutils literal"><span class="pre">PortScanner(host,ini_port,end_port,dn):</span></code></p>
+<ul class="simple">
+<li>Constructor de la clase.</li>
+<li>Los parámetros formales son idénticos a los atributos de clase con el mismo nombre.</li>
+<li>devuelve una instancia de PortScanner.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">init_queue()</span></code></p>
+<ul class="simple">
+<li>Método de instancia que inicializa en función de los atributos de dicha instancia la cola de tareas, creando y añadiendo AngieTasks por cada puerto especificado.</li>
+<li>No tiene parámetros formales.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">set_verbose(v)</span></code></p>
+<ul class="simple">
+<li>Asigna el valor dado a la variable verbose.</li>
+<li><em>v</em> es un booleano que vale True si se desea el modo verbose. False en caso contrario.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">set_sweep_mode(sm)</span></code></p>
+<ul class="simple">
+<li>Asigna el valor dado a la variable sweep_mode.</li>
+<li><em>sm</em> es un booleano que vale True si se desea realizar un barrido en modo sweep_mode. False en caso contrario.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">fmole(q,results,v,sm)</span></code></p>
+<ul class="simple">
+<li>Función que ejecuta una mole. Dependiendo de si sweep_mode está activo, realizará un escaneo de puertos a un host o un barrido a una red determinada. Cada hebra coge una tarea y la realiza. Al finalizar informa de que ha terminado y coge otra tarea si el número de tareas no está vacío.</li>
+<li><em>q</em> es la cola de tareas, <em>results</em> es la lista donde se devolverán los resultados, <em>v</em> es un booleano (verbose) y sm es también un booleano (sweep_mode).</li>
+<li>Devuelve None</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">parse_ipmask(ipmask)</span></code></p>
+<ul class="simple">
+<li>Se encarga de coger una ip/mascara_red y devolver la dirección de la primera ip de esa red (la dirección de la propia red). El cálculo brevemente consiste en realizar una operación &amp; entre la máscara y la direción dada. En realidad se trabaja solo con el octeto que resulta de hacer mascara módulo 8 pero el concepto es el mísmo.</li>
+<li>El parámetro de entrada es una cadena de caracteres que representa una dirección ip con su máscara de red correspondiente.</li>
+<li>devuelve una lista [final_ip,mask] que representa la primera ip de la subred y la máscara que fue proporcionada en un origen.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">make_report()</span></code></p>
+<ul class="simple">
+<li>Elabora un resumen en base a los resultados que ha proporcionado cada hebra. En caso de ser un escaneo de puertos, informa sobre los puertos abiertos. En caso de ser un escaneo de hosts activos, informa sobre que host responden a peticiones icmp.</li>
+<li>No tiene parámetros formáles.</li>
+<li>Devuelve una lista con todos los hosts o puertos que dan positivo en el escaneo realizado.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">launch_moles()</span></code></p>
+<ul class="simple">
+<li>Función que inicializa toda la lista de moles de la instancia PortScanner. Posteriormente quedará en espera bloqueada hasta que todas las moles terminen su función.</li>
+<li>No tiene parámetros formales</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">set_nmoles(n):</span></code></p>
+<ul class="simple">
+<li>asigna el valor n a la variable de instancia nmoles de la clase PortScanner.</li>
+<li><em>n</em> es un entero que representa el número de moles deseadas.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">lookup():</span></code></p>
+<ul class="simple">
+<li>Resuelve un nombre de dominio si la variable de instancia <em>dn</em> de la clase PortScanner está activa. El nombre de dominio debe especificarse en la variable de instancia <em>host</em>.</li>
+<li>No tiene parámetros formales.</li>
+<li>Devuelve una cadena de caracteres que representa la ip resultado de la consulta DNS del nombre de dominio.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">begin_scan()</span></code></p>
+<ul class="simple">
+<li>Función que prepara todo el proceso de escaneo y lanza las hebras. También calcula el tiempo de ejecución de todo el proceso y muestra los resultados por pantalla. Es la función estandar a ejecutar después de crear una instancia PortScanner.</li>
+<li>No tiene parámetros formales.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">begin_sweep()</span></code></p>
+<ul class="simple">
+<li>Análoga a <em>begin_scan()</em> pero esta vez se realizará un barrido a la ip/máscara especificada en la variable de instancia <em>host</em>.</li>
+<li>No tiene parámetros formales.</li>
+<li>Devuelve None.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="angiecolors">
+<h3>AngieColors<a class="headerlink" href="#angiecolors" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Adicionalmente existe un módulo llamado AngieColors que no representa funcionalidad pero es utilizado como variable enumerada para imprimir colores por pantalla. Sus opciones son:</p>
+<ul class="simple">
+<li>DEFAULT</li>
+<li>HEADER</li>
+<li>OKBLUE</li>
+<li>OKGREEN</li>
+<li>WARNING</li>
+<li>FAIL</li>
+<li>ENDC</li>
+<li>BOLD</li>
+<li>UNDERLINE</li>
+</ul>
+<p>En especial, ENDC no es un color, sino que desactiva las modificaciones hechas anteriormente.</p>
+<p>Un ejemplo de su uso puede ser:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">AngieColors</span><span class="o">.</span><span class="n">OKGREEN</span> <span class="o">+</span> <span class="s2">&quot;Texto en verde&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="help.html" title="Title"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Documentación de AngieSF"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AngieSF 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Javier de Ángeles Fernández.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

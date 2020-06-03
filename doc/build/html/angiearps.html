@@ -1,0 +1,183 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Angie ARP Spoofing &#8212; AngieSF 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Angie Repeater" href="angierp.html" />
+    <link rel="prev" title="Angie Sniffer" href="angiesn.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="angierp.html" title="Angie Repeater"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="angiesn.html" title="Angie Sniffer"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AngieSF 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="angiesn.html"
+                        title="previous chapter">Angie Sniffer</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="angierp.html"
+                        title="next chapter">Angie Repeater</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="angie-arp-spoofing">
+<h1>Angie ARP Spoofing<a class="headerlink" href="#angie-arp-spoofing" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="descripcion">
+<h2>Descripción<a class="headerlink" href="#descripcion" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Angie ARP Spoofing es una pequeña herramienta de customización de paquetes basados en el protocolo ARP para la realización del clásico ataque MITM conocido como ARP Spoofing. Introducciendo en la aplicación una ip de víctima y una ip de puerta de enlace común entre el usuario y la víctima, la aplicación comenzará a inyectar paquetes ARP en la red envenenando las tablas ARP de los dispositivos haciendo creer a estos que deben enviar tráfico al usuario de la aplicación situandose este en medio de la “conversación”.</p>
+<p>La libreria utilizada para hacer la interfaz cli es click (<a class="reference external" href="https://click.palletsprojects.com/en/7.x/">https://click.palletsprojects.com/en/7.x/</a>).</p>
+</div></blockquote>
+</div>
+<div class="section" id="uso-basico">
+<h2>Uso básico<a class="headerlink" href="#uso-basico" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Siempre es posible ejecutar el siguiente trozo de código para explorar la funcionalidad de la herramienta:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">angiearps</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+<p>Las opciones necesarias para ejecutar la herramienta son:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">target_ip</span> <span class="n">STRING</span> <span class="n">ip</span> <span class="n">objetivo</span> <span class="k">del</span> <span class="n">ataque</span><span class="o">.</span>
+
+<span class="o">--</span><span class="n">router_ip</span> <span class="n">STRING</span> <span class="n">ip</span> <span class="n">de</span> <span class="n">la</span> <span class="n">puerta</span> <span class="n">de</span> <span class="n">enlace</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Un ejemplo podría ser:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">angiearps</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">router_ip</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">1.1</span> <span class="o">--</span><span class="n">target_ip</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">1.130</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="clases">
+<h2>Clases<a class="headerlink" href="#clases" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>A continuación se presenta una breve descripción de cada una de las clases y la funcionalidad que presentan.</div></blockquote>
+<div class="section" id="spoofer">
+<h3>Spoofer<a class="headerlink" href="#spoofer" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Spoofer es la clase que incorpora toda la funcionalidad necesaria para llevar a cabo el ataque. Incorpora métodos para configurar las variables internas de la clase así como métodos para realizar la inyección de paquetes por un interfaz en función de esas variables.</p>
+<p><strong>Atributos de la clase:</strong></p>
+<p><code class="docutils literal"><span class="pre">target_ip:</span></code> cadena de caracteres que representa la ip del objetivo a realizar el ataque.</p>
+<p><code class="docutils literal"><span class="pre">router_ip:</span></code> cadena de caracteres que representa la ip de la puerta de enlace a la que está conectado el objetivo.</p>
+<p><strong>Funcionalidad de la clase:</strong></p>
+<p><code class="docutils literal"><span class="pre">Spoofer():</span></code></p>
+<ul class="simple">
+<li>Constructor de la clase.</li>
+<li>no tiene parámetros formales.</li>
+<li>devuelve una instancia de Spoofer.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">set_router_ip(rip):</span></code></p>
+<ul class="simple">
+<li>asigna el valor de rip a la variable interna router_ip.</li>
+<li><em>rip</em> es la ip del router objetivo.</li>
+<li>devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">set_target_ip(tip):</span></code></p>
+<ul class="simple">
+<li>asigna el valor de tip a la variable interna target_ip.</li>
+<li><em>tip</em> es la ip del router objetivo.</li>
+<li>devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">spoof():</span></code></p>
+<ul class="simple">
+<li>método que utiliza las variables internas previamente asignadas para fabricar los paquetes ARP necesarios para realizar el ataque. Envia una pareja de paquetes ARP. Uno con ip = router_ip y otro con ip = target_ip haciendo entender que el atacante es el router.</li>
+<li>No tiene parámetros formales.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">request_mac(ip):</span></code></p>
+<ul class="simple">
+<li>Crea un paquete ARP que pregunta por la dirección MAC especificada.</li>
+<li><em>ip</em> es una cadena de caracteres que representa la ip que se quiere resolver mediante ARP a MAC.</li>
+<li>Devuleve una cadena de caracteres con la dirección MAC de la ip solicitada o bien -1 si no se ha podido encontrar.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">begin_spoof():</span></code></p>
+<ul class="simple">
+<li>Método que coordina y lleva a cabo todo el proceso del ataque con los métodos de instancia y las variables de instancia especificadas. En resumen, toma las ip de router y objetivo, resuelve a direcciones MAC y si todo ha salido correctamente, inyecta los paquetes ARP con las direcciones MAC de router y objetivo con objeto de envenenar sus tablas ARP.</li>
+<li>No tiene parámetros formales.</li>
+<li>Devuelve None.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="angierp.html" title="Angie Repeater"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="angiesn.html" title="Angie Sniffer"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AngieSF 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Javier de Ángeles Fernández.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

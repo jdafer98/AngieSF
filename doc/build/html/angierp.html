@@ -1,0 +1,199 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Angie Repeater &#8212; AngieSF 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Angie ARP Spoofing" href="angiearps.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="angiearps.html" title="Angie ARP Spoofing"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AngieSF 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="angiearps.html"
+                        title="previous chapter">Angie ARP Spoofing</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="angie-repeater">
+<h1>Angie Repeater<a class="headerlink" href="#angie-repeater" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="descripcion">
+<h2>Descripción<a class="headerlink" href="#descripcion" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Angie Repeater es una herramienta de customización y envio de paquetes HTTP. La herramienta es capaz de leer un fichero con un formato determinado, crear un paquete a partir de el y enviarlo a un destino y un puerto determinado. Posteriormente se puede visualizar la respuesta. Esta herramienta es especialmente interesante cuando se quiere testear una API o algún servicio web que puede tener un comportamiento indeseado al recibir de alguna fuente un paquete malicioso que contenga algún campo http modificado malintencionadamente. La herramienta también soporta https y es capaz de enviar el paquete un número determinado de veces.</p>
+<p>La libreria utilizada para hacer la interfaz cli es click (<a class="reference external" href="https://click.palletsprojects.com/en/7.x/">https://click.palletsprojects.com/en/7.x/</a>).</p>
+</div></blockquote>
+</div>
+<div class="section" id="uso-basico">
+<h2>Uso básico<a class="headerlink" href="#uso-basico" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Siempre es posible ejecutar el siguiente trozo de código para explorar la funcionalidad de la herramienta:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">angiearps</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+<p>Las opciones necesarias para ejecutar la herramienta son:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">filename</span> <span class="n">TEXT</span>  <span class="n">Archivo</span> <span class="n">donde</span> <span class="n">se</span> <span class="n">encuentra</span> <span class="n">el</span> <span class="n">paquete</span> <span class="n">que</span> <span class="n">se</span> <span class="n">desea</span> <span class="n">enviar</span> <span class="p">(</span><span class="n">NECESARIA</span><span class="p">)</span>
+<span class="o">--</span><span class="n">count</span> <span class="n">INTEGER</span>  <span class="n">Cuantas</span> <span class="n">veces</span> <span class="n">se</span> <span class="n">desea</span> <span class="n">enviar</span> <span class="n">el</span> <span class="n">paquete</span><span class="o">.</span> <span class="o">-</span><span class="mi">1</span> <span class="n">para</span> <span class="n">infinito</span>
+<span class="o">--</span><span class="n">url</span> <span class="n">TEXT</span>       <span class="n">Url</span> <span class="k">del</span> <span class="n">sitio</span> <span class="n">donde</span> <span class="n">se</span> <span class="n">quiere</span> <span class="n">enviar</span> <span class="n">el</span> <span class="n">paquete</span><span class="o">.</span>
+<span class="o">--</span><span class="n">port</span> <span class="n">TEXT</span>      <span class="n">Puerto</span> <span class="n">donde</span> <span class="n">se</span> <span class="n">desea</span> <span class="n">enviar</span> <span class="n">la</span> <span class="n">petición</span><span class="o">.</span> <span class="p">(</span><span class="n">por</span> <span class="n">defecto</span><span class="p">,</span> <span class="mi">80</span> <span class="n">para</span> <span class="n">http</span> <span class="mi">443</span> <span class="n">para</span> <span class="n">https</span><span class="p">)</span>
+<span class="o">--</span><span class="n">https</span> <span class="n">INTEGER</span>  <span class="n">https</span> <span class="n">habilitado</span> <span class="p">(</span><span class="n">por</span> <span class="n">defecto</span> <span class="n">deshabilitado</span><span class="p">)</span>
+<span class="o">--</span><span class="n">help</span>           <span class="n">Show</span> <span class="n">this</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Un ejemplo para enviar un paquete http podría ser:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">angierp</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">filename</span> <span class="n">ehttp</span> <span class="o">--</span><span class="n">url</span> <span class="n">info</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span> <span class="o">--</span><span class="n">port</span> <span class="mi">80</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>Para dirigir la salida a un fichero puede hacerse::</dt>
+<dd>python3 angierp.py –filename ehttp –url info.cern.ch –port 80 &gt; salida.out</dd>
+<dt>Si no se desea salida, puede hacerse (en Linux)::</dt>
+<dd>python3 angierp.py –filename ehttp –url info.cern.ch –port 80 &gt; /dev/null</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="formato">
+<h2>Formato<a class="headerlink" href="#formato" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>El formato de un paquete http debe de seguir el siguiente esquema:</p>
+<ul class="simple">
+<li>Existe una cadena de caracteres reservada para hacer un salto de linea en el paquete. Por defecto es <code class="docutils literal"><span class="pre">&#64;&#64;ANGIE_ENDL</span></code>. Si se usa la clase Repeater de la aplicación, ésta proporciona métodos para cambiar esta cadena.</li>
+<li>No importa los saltos de linea o caracteres n o r que se introduzcan en el fichero ya que estos son eliminados en el procesamiento interno, pero es NECESARIO que las lineas del paquete acaben en el delimitador citado en la regla anterior.</li>
+<li>En la última linea, debido a la implementación de http (RFCs 7230-7237), el paquete debe terminarse con dos delimitadores.</li>
+<li>Por todo lo demás, el paquete debe escribirse en texto plano. Cada carácter escrito será transformado a bytes y enviado por la red al destino especificado.</li>
+</ul>
+<p>EJEMPLO:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">GET</span> <span class="o">/</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span><span class="o">@</span><span class="nd">@ANGIE_ENDLN</span>
+<span class="n">Host</span><span class="p">:</span> <span class="n">info</span><span class="o">.</span><span class="n">cern</span><span class="o">.</span><span class="n">ch</span><span class="o">@</span><span class="nd">@ANGIE_ENDLN</span>
+<span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="o">/</span><span class="mf">5.0</span> <span class="p">(</span><span class="n">X11</span><span class="p">;</span> <span class="n">Ubuntu</span><span class="p">;</span> <span class="n">Linux</span> <span class="n">x86_64</span><span class="p">;</span> <span class="n">rv</span><span class="p">:</span><span class="mf">76.0</span><span class="p">)</span> <span class="n">Gecko</span><span class="o">/</span><span class="mi">20100101</span> <span class="n">Firefox</span><span class="o">/</span><span class="mf">76.0</span><span class="o">@</span><span class="nd">@ANGIE_ENDLN</span>
+<span class="n">Accept</span><span class="p">:</span> <span class="n">text</span><span class="o">/</span><span class="n">html</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">xhtml</span><span class="o">+</span><span class="n">xml</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">xml</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span><span class="n">image</span><span class="o">/</span><span class="n">webp</span><span class="p">,</span><span class="o">*/*</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.8</span><span class="o">@</span><span class="nd">@ANGIE_ENDLN</span>
+<span class="n">Accept</span><span class="o">-</span><span class="n">Language</span><span class="p">:</span> <span class="n">en</span><span class="o">-</span><span class="n">US</span><span class="p">,</span><span class="n">en</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="o">@</span><span class="nd">@ANGIE_ENDLN</span>
+<span class="n">Accept</span><span class="o">-</span><span class="n">Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span> <span class="n">deflate</span><span class="o">@</span><span class="nd">@ANGIE_ENDLN</span>
+<span class="n">DNT</span><span class="p">:</span> <span class="mi">1</span><span class="o">@</span><span class="nd">@ANGIE_ENDLN</span>
+<span class="n">Connection</span><span class="p">:</span> <span class="n">keep</span><span class="o">-</span><span class="n">alive</span><span class="o">@</span><span class="nd">@ANGIE_ENDLN</span>
+<span class="n">Upgrade</span><span class="o">-</span><span class="n">Insecure</span><span class="o">-</span><span class="n">Requests</span><span class="p">:</span> <span class="mi">1</span><span class="o">@</span><span class="nd">@ANGIE_ENDLN</span><span class="o">@</span><span class="nd">@ANGIE_ENDLN</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="clases">
+<h2>Clases<a class="headerlink" href="#clases" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>A continuación se presenta una breve descripción de cada una de las clases y la funcionalidad que presentan.</div></blockquote>
+<div class="section" id="repeater">
+<h3>Repeater<a class="headerlink" href="#repeater" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Spoofer es la clase que incorpora toda la funcionalidad necesaria para leer un paquete http desde un fichero que obedezca el formato anteriormente descrito en el apartado formato, perparar el paquete http y enviarlo a su destinatario.</p>
+<p><strong>Atributos de la clase:</strong></p>
+<p><code class="docutils literal"><span class="pre">ENDL</span></code> cadena de caracteres constante que representa el delimitador de salto de linea para la correcta lectura y procesamiento del paquete.</p>
+<p><strong>Funcionalidad de la clase:</strong></p>
+<p><code class="docutils literal"><span class="pre">Repeater():</span></code></p>
+<ul class="simple">
+<li>Constructor de la clase.</li>
+<li>no tiene parámetros formales.</li>
+<li>devuelve una instancia de Repeater.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">set_endl(s):</span></code></p>
+<ul class="simple">
+<li>asigna el valor de s a la variable interna ENDL.</li>
+<li><em>s</em> es el nuevo delimitador deseado.</li>
+<li>devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">read_from_file(path):</span></code></p>
+<ul class="simple">
+<li>lee el fichero ubicado en <strong>path</strong> y transforma la cadena a una lista para ser enviada.</li>
+<li><em>path</em> es la ruta donde está ubicada el fichero.</li>
+<li>devuelve una cadena de caracteres con la cadena lista para enviar.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">send_http(http_str,url,p):</span></code></p>
+<ul class="simple">
+<li>método que envía en forma de bytes la cadena de caracteres <em>http_str</em> a la <em>url</em> y <em>puerto</em> especificados. Recive la respuesta y la muestra en salida estándar.</li>
+<li><em>http_str</em> es la cadena a enviar, <em>url</em> es el destino y <em>p</em> es el puerto objetivo.</li>
+<li>Devuelve una cadena de caracteres correspondiente a la respuesta.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">send_http(http_str,url,p):</span></code></p>
+<ul class="simple">
+<li>método que envía en forma de bytes la cadena de caracteres <em>http_str</em> a la <em>url</em> y <em>puerto</em> especificados envolviendo los datos http en un protocolo intermedio (preferentemente TLS 1.3) para formar https. Recive la respuesta y la muestra en salida estándar.</li>
+<li><em>http_str</em> es la cadena a enviar, <em>url</em> es el destino y <em>p</em> es el puerto objetivo.</li>
+<li>Devuelve una cadena de caracteres correspondiente a la respuesta.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="angiearps.html" title="Angie ARP Spoofing"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AngieSF 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Javier de Ángeles Fernández.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

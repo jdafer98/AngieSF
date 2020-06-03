@@ -1,0 +1,176 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Angie Sniffer &#8212; AngieSF 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Angie Port Scanner" href="angieps.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="angieps.html" title="Angie Port Scanner"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AngieSF 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="angieps.html"
+                        title="previous chapter">Angie Port Scanner</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="angie-sniffer">
+<h1>Angie Sniffer<a class="headerlink" href="#angie-sniffer" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="descripcion">
+<h2>Descripción<a class="headerlink" href="#descripcion" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Angie Sniffer es un analizador de paquetes ligero escrito en python que provee toda la funcionalidad necesaria para captar tráfico de red y analizar cabeceras de paquetes, puertos destino, origen, tamaño de los paquetes y otra información que puede resultar útil para conocer que ocurre en la red y realizar estudios estadísticos con el fin de optimizar el flujo de información de tu infraestructura. Tan solo es necesario ejecutar el programa en un interfaz y analizar el paquete deseado.</p>
+<p>La biblioteca principal que hace la abstracción de la tarjeta de red utilizada es <em>scapy</em> (<a class="reference external" href="https://scapy.readthedocs.io/en/latest/">https://scapy.readthedocs.io/en/latest/</a>). Tambien hace uso de la libreria nativa de python <em>Threading</em></p>
+</div></blockquote>
+</div>
+<div class="section" id="uso-basico">
+<h2>Uso básico<a class="headerlink" href="#uso-basico" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Para ejecutar AngieSN simplemente usa:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">python3</span> <span class="n">angiesn</span>
+</pre></div>
+</div>
+<p><strong>(es necesario poseer privilegios de superusuario)</strong></p>
+<p>Una vez hecho esto, angieSN detectará automáticamente los interfaces de los que dispone el equipo que lo ejecuta. Escribiendo el nombre del interfaz y pulstando &lt;enter&gt;, angiesn comenzará a capturar tráfico entrante y saliente del interfaz deseado. Manteniendo pulsado &lt;ctrl izq&gt; el proceso dejará de capturar tráfico.
+Seguidamente, nos encontramos un proceso iterativo donde angiesn pregunta por un paquete a analizar (todos identificados por un número). Escribiendo el número de paquete, el software nos proporciona toda la información que puede sernos útil acerca de ese paquete en concreto.
+Cuando no se desee analizar más paquetes, sencillamente escribiremos “no” o “n” en la terminal.
+Es posible que deseemos guardar la captura de paquetes para analizarla más tarde con otra herramienta, o hacer gráficos y otros estudios. Angiesn nos pregunta al final si deseamos guardar nuestra captura en un fichero pcap y el nombre de destino del fichero.</p>
+</div></blockquote>
+</div>
+<div class="section" id="clases">
+<h2>Clases<a class="headerlink" href="#clases" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>A continuación se presenta una breve descripción de cada una de las clases y la funcionalidad que presentan.</div></blockquote>
+<div class="section" id="sniffer">
+<h3>Sniffer<a class="headerlink" href="#sniffer" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>La clase <em>Sniffer</em> es la clase que proporciona toda la funcionalidad necesaria para capturar el tráfico de red, detectar interfaces y en general llevar el flujo de control del proceso de captura. Una instancia de esta clase dentro de una funcion principal, es de hecho todo lo necesario para conformar esta herramienta.</p>
+<p><strong>Atributos de la clase:</strong></p>
+<p><code class="docutils literal"><span class="pre">selected_iface:</span></code> (string) Cadena de caracteres que representa el nombre del interfaz sobre el que se realizará la captura de tráfico.</p>
+<p><code class="docutils literal"><span class="pre">total_rows:</span></code> (list:packets) Conjunto de todos los paquetes que se capturan.</p>
+<p><code class="docutils literal"><span class="pre">signal:</span></code> (boolean) variablle de control que se utiliza para enviar una notificación al proceso de captura. Normalmente utilizada para indicar la prada del proceso.</p>
+<p><code class="docutils literal"><span class="pre">count:</span></code> (int) Es la variable que toma la cuenta de todos los paquetes capturados.</p>
+<p><strong>Funcionalidad de la clase:</strong></p>
+<p><code class="docutils literal"><span class="pre">Sniffer():</span></code></p>
+<ul class="simple">
+<li>Constructor de la clase.</li>
+<li>No tiene parámetros de entrada.</li>
+<li>devuelve una instancia de Sniffer.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">detect_ifaces():</span></code></p>
+<ul class="simple">
+<li>Método que devuelve una cadena de carácteres que representa los interfaces detectados en el equipo.</li>
+<li>No tiene parámetros formales.</li>
+<li>devuelve un string correspondiente a los interfaces detectados.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">select_iface(i):</span></code></p>
+<ul class="simple">
+<li>Modifica la variable de instancia <em>selected_iface</em> para indicar que un nuevo interfaz ha sido selecionado.</li>
+<li><em>i</em> es la cadena de caracteres que representa el interfaz que se desea selecionar.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">waiting_thread():</span></code></p>
+<ul class="simple">
+<li>Función que lanza una hebra que recibirá la petición de parada del proceso de captura.</li>
+<li>No tiene parámetros formales.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">inter(x):</span></code></p>
+<ul class="simple">
+<li>Método privado de instancia que realiza una operación con el último paquete capturado</li>
+<li><em>x</em> es un paquete.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">sniff_pcks(n,f):</span></code></p>
+<ul class="simple">
+<li>método que comienza un proceso de captura de paquetes. Es posible especificar un número de paquetes y un filtro.</li>
+<li><em>n</em> es el número de paquetes a sniffar y f es un filtro con sintáxis BPF.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">begin_sniff(f):</span></code></p>
+<ul class="simple">
+<li>Método que lleva acabo todo el proceso de sniffado de paquetes, gestionando el análisis posterior de los paquetes capturados y el guardado en un archivo pcap.</li>
+<li><em>f</em> es un filtro BPF que utiliza el método para seleccionar el tráfico filtrado.</li>
+<li>Devuelve None.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="angieps.html" title="Angie Port Scanner"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AngieSF 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Javier de Ángeles Fernández.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>
