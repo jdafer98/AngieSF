@@ -60,7 +60,23 @@ def test_select_sets():
     assert cr.minus_selected == True
 
 def test_read_custom_set():
+    #'/home/travis/build/jdafer98/AngieSF/angiecr'
+    cr = Crawler()
+    example = '/home/travis/build/jdafer98/AngieSF/angiecr/s'
+
+    cr.set_custom_set_path(example)
+    cr.read_custom_set()
     assert True
+
+def test_read_custom_dict():
+    #'/home/travis/build/jdafer98/AngieSF/angiecr'
+    cr = Crawler()
+    example = '/home/travis/build/jdafer98/AngieSF/angiecr/d'
+
+    cr.set_custom_dict_path(example)
+    cr.read_custom_dict()
+    assert True
+ 
 
 
 
