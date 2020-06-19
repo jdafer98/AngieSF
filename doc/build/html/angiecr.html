@@ -1,0 +1,298 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Angie Crawler &#8212; AngieSF 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Angie Repeater" href="angierp.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="angierp.html" title="Angie Repeater"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AngieSF 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="angierp.html"
+                        title="previous chapter">Angie Repeater</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="angie-crawler">
+<h1>Angie Crawler<a class="headerlink" href="#angie-crawler" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="descripcion">
+<h2>Descripción<a class="headerlink" href="#descripcion" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Angie Crawler es una herramienta de Bruteforcing a directorios en aplicaciones web (o brutefrocing en general, si se desea) como parte del framework AngieSF. Seleccionando un set entre los disponibles, uno de propia creación, o un diccionario y un modo (fijo o incremental. Solo si se ha seleccionado un set) podemos descubrir directorios ocultos en aplicaciones web pero que estén expuestos al usuario realizando peticiones.</div></blockquote>
+</div>
+<div class="section" id="uso-basico">
+<h2>Uso básico<a class="headerlink" href="#uso-basico" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Siempre es posible ejecutar el siguiente trozo de código para explorar la funcionalidad de la herramienta:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">angiearps</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">help</span>
+</pre></div>
+</div>
+<p>Las opciones básicas de la herramienta son:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">url</span> <span class="n">TEXT</span>          <span class="n">dirección</span> <span class="n">objetivo</span> <span class="k">del</span> <span class="n">ataque</span> <span class="p">(</span><span class="n">NECESARIA</span><span class="p">)</span>
+
+<span class="o">--</span><span class="n">fixed</span> <span class="n">INTEGER</span>     <span class="n">ataque</span> <span class="n">de</span> <span class="n">combinaciones</span> <span class="n">de</span> <span class="n">longitud</span> <span class="n">fija</span>
+
+<span class="o">--</span><span class="n">dictionary</span> <span class="n">TEXT</span>   <span class="n">path</span> <span class="n">al</span> <span class="n">diccionario</span> <span class="n">customizado</span>
+
+<span class="o">--</span><span class="n">custom_set</span> <span class="n">TEXT</span>   <span class="n">Path</span> <span class="n">al</span> <span class="nb">set</span> <span class="n">customizado</span><span class="o">.</span> <span class="n">Si</span> <span class="n">se</span> <span class="n">especifica</span><span class="p">,</span> <span class="n">no</span> <span class="n">se</span>
+                  <span class="n">incluyen</span> <span class="n">los</span> <span class="n">diccionarios</span> <span class="n">minus</span><span class="p">,</span> <span class="n">mayus</span><span class="p">,</span> <span class="n">numbers</span><span class="p">,</span>
+                  <span class="n">special</span>
+
+<span class="o">--</span><span class="n">minus</span> <span class="n">INTEGER</span>     <span class="n">Incluir</span> <span class="n">minusculas</span> <span class="n">en</span> <span class="n">el</span> <span class="n">ataque</span><span class="o">.</span> <span class="mi">0</span> <span class="n">off</span> <span class="mi">1</span> <span class="n">on</span>
+
+<span class="o">--</span><span class="n">mayus</span> <span class="n">INTEGER</span>     <span class="n">Incluir</span> <span class="n">mayusculas</span> <span class="n">en</span> <span class="n">el</span> <span class="n">ataque</span><span class="o">.</span> <span class="mi">0</span> <span class="n">off</span> <span class="mi">1</span> <span class="n">on</span>
+
+<span class="o">--</span><span class="n">numbers</span> <span class="n">INTEGER</span>   <span class="n">Incluir</span> <span class="n">numeros</span> <span class="mi">0</span><span class="o">-</span><span class="mi">9</span> <span class="n">en</span> <span class="n">el</span> <span class="n">ataque</span><span class="o">.</span> <span class="mi">0</span> <span class="n">off</span> <span class="mi">1</span> <span class="n">on</span>
+
+<span class="o">--</span><span class="n">special</span> <span class="n">INTEGER</span>   <span class="n">Incluir</span> <span class="n">caracteres</span> <span class="n">especiales</span> <span class="n">en</span> <span class="n">el</span> <span class="n">ataque</span><span class="o">.</span> <span class="mi">0</span> <span class="n">off</span> <span class="mi">1</span> <span class="n">on</span>
+
+<span class="o">--</span><span class="n">size</span> <span class="n">INTEGER</span>      <span class="n">Incluir</span> <span class="n">la</span> <span class="n">longitud</span> <span class="n">fija</span> <span class="k">del</span> <span class="n">ataque</span> <span class="n">de</span> <span class="n">fuerza</span> <span class="n">bruta</span>
+                  <span class="n">fija</span><span class="o">.</span> <span class="n">Solo</span> <span class="n">tiene</span> <span class="n">efecto</span> <span class="n">si</span> <span class="o">--</span><span class="n">fixed</span> <span class="n">está</span> <span class="n">activo</span>
+
+<span class="o">--</span><span class="n">nthreads</span> <span class="n">INTEGER</span>  <span class="n">Número</span> <span class="n">de</span> <span class="n">hebras</span> <span class="n">con</span> <span class="n">las</span> <span class="n">que</span> <span class="n">realizar</span> <span class="n">el</span> <span class="n">ataque</span>
+</pre></div>
+</div>
+<p><strong>Nota:</strong> Se puede optar por usar un set predefinido, uno propio o un diccionario pero al menos un set debe estar presente si se desea hacer un ataque combinatorio o un diccionario si el modo <em>–dictionary</em> Está activo.</p>
+<p>Un ejemplo para un ataque de fuerza bruta combinatorio, incremental y con un set de minusculas de la a-z y mayusculas A-Z podría ser:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">angiearps</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">url</span> <span class="n">www</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">com</span> <span class="o">--</span><span class="n">minus</span> <span class="mi">1</span> <span class="o">--</span><span class="n">mayus</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>Se entiende por incremental, probar todas las combinaciones del conjunto potencia del set, excepto el conjunto vacío. Fixed, será probar todos los elementos de un subconjunto del conjunto potencia tal que su cardinal sea el especificado en –size. Por defecto vale 1.</p>
+</div></blockquote>
+</div>
+<div class="section" id="sets-y-diccionarios">
+<h2>Sets y Diccionarios<a class="headerlink" href="#sets-y-diccionarios" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Sets disponibles:</p>
+<ul class="simple">
+<li><strong>minus:</strong> Carácteres ASCII de la a-z</li>
+<li><strong>mayus:</strong> Carácteres ASCII de la A-Z</li>
+<li><strong>numbers:</strong> Carácteres ASCII numéricos del 0-9</li>
+<li><strong>special:</strong> Carácteres ASCII imprimibles, no pertenecientes a las anteriores categorias. De aquí se excluyen algunos carácteres que pueden crear conflicto con la <em>query string</em> en una petición GET de HTTP.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="crear-sets-personalizados">
+<h3>Crear Sets personalizados<a class="headerlink" href="#crear-sets-personalizados" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Si ninguno de los sets o combinaciones de ellos satisface las necesidades del usuario, Angie Crawler permite la opción de crear sets personalizados.</p>
+<p>Simplemente se trata de un fichero de texto que cumple las siguientes normas:</p>
+<ul class="simple">
+<li>Cada elemento que exista en el fichero será un carácter del set (se permiten incluso agrupaciones de carácteres o palabras completas)</li>
+<li>Entre cada dos carácteres, debe existir una coma para separarlos.</li>
+<li>Para introducir una coma como carácter, se debe escribir el caracter ‘..’</li>
+</ul>
+<p>Un ejemplo sería un fichero que contenga:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">*</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="crear-dicionarios-personalizados">
+<h3>Crear Dicionarios personalizados<a class="headerlink" href="#crear-dicionarios-personalizados" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Por compatibilidad con diccionarios clásicos como <em>rock_you.txt</em>, Angie Crawler reconoce diccionarios de formato similar. Un diccionario válido será aquel que contenga palabras o cadenas de caracteres separadas por un salto de linea.</p>
+<p>Por ejemplo:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">palabra1</span>
+<span class="n">palabra2</span>
+<span class="n">palabra3</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="clases">
+<h2>Clases<a class="headerlink" href="#clases" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>A continuación se presenta una breve descripción de cada una de las clases y la funcionalidad que presentan.</div></blockquote>
+<div class="section" id="crawler">
+<h3>Crawler<a class="headerlink" href="#crawler" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>Spoofer es la clase que incorpora toda la funcionalidad necesaria para llevar a cabo el ataque. Incorpora métodos para configurar las variables internas de la clase así como métodos para realizar la inyección de paquetes por un interfaz en función de esas variables.</p>
+<p><strong>Atributos de la clase:</strong></p>
+<p><code class="docutils literal"><span class="pre">(Variable</span> <span class="pre">de</span> <span class="pre">clase)</span> <span class="pre">code:</span></code> Lista de enteros que representa una nueva combinación a generar para la aplicación. Los enteros representan la posición de un caracter en el set de caractéres especificado.</p>
+<p><code class="docutils literal"><span class="pre">(Variable</span> <span class="pre">de</span> <span class="pre">clase)</span> <span class="pre">turn:</span></code> Número entero que representa la siguiente entrada del diccionario que debe leer una hebra. Utilizada para sincronización de hebras.</p>
+<p><code class="docutils literal"><span class="pre">(Variable</span> <span class="pre">de</span> <span class="pre">clase)</span> <span class="pre">code_lock:</span></code> Cerrojo para modificar las variables compartidas por varias hebras.</p>
+<p><code class="docutils literal"><span class="pre">isFixed:</span></code> Booleano que expresa si el ataque de fuerza bruta se realiza con longitud fija o no.</p>
+<p><code class="docutils literal"><span class="pre">size:</span></code> Entero que expresa la longitud del ataque de fuerza bruta de longitud fija. Solo tiene efecto si se selecciona este ataque.</p>
+<p><code class="docutils literal"><span class="pre">result:</span></code> Lista de cadenas de caracteres que recogen el resultado final después del ataque.</p>
+<p><code class="docutils literal"><span class="pre">custom_set_path:</span></code> Cadena de caracteres que representa la ruta hasta el fichero que contiene el set de caracteres que se desea usar en el ataque.</p>
+<p><code class="docutils literal"><span class="pre">custom_dict_path:</span></code> Cadena de caracteres que representa la ruta hasta el fichero que contiene el diccionario que se desea usar en el ataque.</p>
+<p><code class="docutils literal"><span class="pre">dictionary:</span></code> Representación interna del diccionario cargado desde un fichero.</p>
+<p><code class="docutils literal"><span class="pre">url:</span></code> Cadena de caracteres que representa el sitio web de destino al que realizar el ataque.</p>
+<p><code class="docutils literal"><span class="pre">nthreads:</span></code> Número de hebras que se desea usar en el ataque.</p>
+<p><code class="docutils literal"><span class="pre">final_set:</span></code> lista de caracteres que representan el set final usado en el ataque, como resultado de combinaciones de sets incluidos en la aplicación o cargado desde un fichero.</p>
+<p><code class="docutils literal"><span class="pre">minus_selected:</span></code> Booleano que representa si el diccionario <em>‘minus’</em> está seleccionado</p>
+<p><code class="docutils literal"><span class="pre">minus:</span></code> Lista de caracteres que representa un diccionario. El contenido del diccionario es el especificado en el apartado <strong>Sets y Diccionarios</strong>.</p>
+<p><code class="docutils literal"><span class="pre">mayus_selected:</span></code> Booleano que representa si el diccionario <em>‘mayus’</em> está seleccionado.</p>
+<p><code class="docutils literal"><span class="pre">mayus:</span></code> Lista de caracteres que representa un diccionario. El contenido del diccionario es el especificado en el apartado <strong>Sets y Diccionarios</strong>.</p>
+<p><code class="docutils literal"><span class="pre">numbers_selected:</span></code> Booleano que representa si el diccionario <em>‘numbers’</em> está seleccionado</p>
+<p><code class="docutils literal"><span class="pre">numbers:</span></code> Lista de caracteres que representa un diccionario. El contenido del diccionario es el especificado en el apartado <strong>Sets y Diccionarios</strong>.</p>
+<p><code class="docutils literal"><span class="pre">special_selected:</span></code> Booleano que representa si el diccionario <em>‘special’</em> está seleccionado</p>
+<p><code class="docutils literal"><span class="pre">special:</span></code> Lista de caracteres que representa un diccionario. El contenido del diccionario es el especificado en el apartado <strong>Sets y Diccionarios</strong>.</p>
+<p><strong>Funcionalidad de la clase:</strong></p>
+<p><code class="docutils literal"><span class="pre">Crawler():</span></code></p>
+<ul class="simple">
+<li>Constructor de la clase.</li>
+<li>no tiene parámetros formales.</li>
+<li>devuelve una instancia de Crawler.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">set_custom_set_path(p):</span></code></p>
+<ul class="simple">
+<li>Asigna el valor de p a la variable interna custom_set_path.</li>
+<li><em>p</em> es el path a un fichero que contiene el diccionario.</li>
+<li>devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">set_custom_dict_path(p):</span></code></p>
+<ul class="simple">
+<li>Asigna el valor de p a la variable interna custom_dict_path.</li>
+<li><em>p</em> es la ip del router objetivo.</li>
+<li>devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">set_isFixed(f):</span></code></p>
+<ul class="simple">
+<li>Asigna el valor de f a la variable interna isFixed.</li>
+<li><em>f</em> es un booleano que indica si se desea activar isFixed.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">init_sets():</span></code></p>
+<ul class="simple">
+<li>(Método Privado). Inicializa los sets que la aplicación trae por defecto</li>
+<li>No tiene parámetros formales.</li>
+<li>Devuleve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">set_url(u):</span></code></p>
+<ul class="simple">
+<li>Asigna el valor de u a la variable interna url.</li>
+<li><em>u</em> representa la url objetivo del ataque.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">set_nthreads(n):</span></code></p>
+<ul class="simple">
+<li>Asigna el valor de n a la variable interna nthreads.</li>
+<li><em>n</em> representa el número de hebras con las que se desea hacer el ataque.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">set_size(s):</span></code></p>
+<ul class="simple">
+<li>Asigna el valor de s a la variable interna size.</li>
+<li><em>s</em> representa la longitud fija del ataque de fuerza bruta si isFixed está activo.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">select_sets(mi,my,num,es):</span></code></p>
+<ul class="simple">
+<li>Método que permite seleccionar los sets con los que se va a llevar a cabo el ataque.</li>
+<li><em>mi,my,num,es</em> son booleanos que representa si se desean añadir los diccionarios <em>minus</em>,*mayus*,*numbers*,*special*.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">read_custom_set():</span></code></p>
+<ul class="simple">
+<li>Método utilizado para leer el set ubicado en la variable local custom_set_path.</li>
+<li>No tiene parámetros formales.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">read_custom_dict():</span></code></p>
+<ul class="simple">
+<li>Método utilizado para leer el diccionario ubicado en la variable local custom_dict_path.</li>
+<li>No tiene parámetros formales.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">gen_one_combination(code_lock,result,final_set,size,url):</span></code></p>
+<ul class="simple">
+<li>Método que genera la siguiente combinación de caracteres a partir del código y comprueba si ese directorio existe en la url objetivo (función ejecutada por las hebras).</li>
+<li><em>code_lock</em> es una variable de tipo Lock, <em>result</em> es la variable donde se almacenarán los resultados, <em>final_set</em> es el set con el que se realizará el ataque y <em>url</em> es la dirección objetivo a la que realizar el ataque.</li>
+<li>Devuelve un.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">request_from_dictionary(dictionary,result,url,turn,code_lock):</span></code></p>
+<ul class="simple">
+<li>Método que toma la siguiente palabra del diccionario seleccionado y comprueba si el directorio existe en la url seleccionada.</li>
+<li><em>code_lock</em> es una variable de tipo Lock, <em>result</em> es la variable donde se almacenarán los resultados, <em>final_set</em> es el set con el que se realizará el ataque y <em>url</em> es la dirección objetivo a la que realizar el ataque.</li>
+<li>Devuelve None.</li>
+</ul>
+<p><code class="docutils literal"><span class="pre">begin_crawl(mode):</span></code></p>
+<ul class="simple">
+<li>Método que coordina y lleva a cabo todo el proceso de descubimiento de directorios en la url especificada. Inicializa o lee los sets o diccionarios (dependiendo del parámetro mode).</li>
+<li><em>mode</em> Indica el modo de ataque (fueza bruta o diccionario).</li>
+<li>Devuelve None.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="angierp.html" title="Angie Repeater"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">AngieSF 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Javier de Ángeles Fernández.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+    </div>
+  </body>
+</html>

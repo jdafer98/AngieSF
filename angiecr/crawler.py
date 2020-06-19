@@ -11,7 +11,7 @@ class Crawler:
 
     def __init__(self):
         self.isFixed = False
-        self.size = 4
+        self.size = 1
         self.code = []
         self.result = []
 

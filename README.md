@@ -20,3 +20,7 @@ Además se decide crear una infraestructura de trabajo automatizada con desarrol
   - AngiePS
   - AngieSN
   - AngieARPS
+  - AngieRP
+  - AngieCR
+
+La documentación se encuentra en el directorio doc de este mismo repositorio.

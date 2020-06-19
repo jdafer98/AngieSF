@@ -6,6 +6,8 @@ Documentación de AngieSF
 
     git clone https://github.com/jdafer98/AngieSF.git
 
+    fab build
+
 Breve descripción.
 ^^^^^^^^^^^^^^^^^^
 
@@ -20,4 +22,5 @@ Herramientas disponibles
    angiesn
    angiearps
    angierp
+   angiecr
 
